@@ -1,6 +1,7 @@
 package com.beyondli.rest;
 
 import com.beyondli.service.FeignTwoService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,8 @@ import javax.annotation.Resource;
 public class FeignTwoRest {
     @Resource
     FeignTwoService feignTwoService;
+    @Value("${title}")
+    private String title;
     /**
      * 测试服务2号
      * @return
@@ -33,5 +36,14 @@ public class FeignTwoRest {
     public String getOne() {
         String info = feignTwoService.getOneInfo();
         return info;
+    }
+
+    /**
+     *获取配置文件的信息
+     */
+    @RequestMapping(value = "/get/config", method = RequestMethod.GET)
+    public String getConfig() {
+        //return "ok";
+        return title;
     }
 }
