@@ -11,4 +11,16 @@ public interface FeignTwoService {
      * @return
      */
     String getOneInfo();
+
+    /**
+     * 测试异常
+     * @param state
+     * @return
+     */
+    String testExcByState(Integer state);
+
+    /**
+     * 测试服务1调用2,2抛异常机制
+     */
+    void helloExc();
 }

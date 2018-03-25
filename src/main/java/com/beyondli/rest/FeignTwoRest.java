@@ -2,6 +2,7 @@ package com.beyondli.rest;
 
 import com.beyondli.service.FeignTwoService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,5 +46,23 @@ public class FeignTwoRest {
     public String getConfig() {
         //return "ok";
         return title;
+    }
+
+    /**
+     * 测试异常
+     */
+    @RequestMapping(value = "/test/exc/{state}", method = RequestMethod.GET)
+    public String testExcByState(@PathVariable Integer state) {
+        String info = feignTwoService.testExcByState(state);
+        return info;
+    }
+
+    /**
+     * 测试服务1调用2,2抛异常机制
+     * @return
+     */
+    @RequestMapping(value = "/hello/exc", method = RequestMethod.GET)
+    public void helloExc() {
+        feignTwoService.helloExc();
     }
 }
